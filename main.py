@@ -73,6 +73,7 @@ def init ():
 
         parser(user_input)
         run = Initial_command()
+        run()
 
 
 
