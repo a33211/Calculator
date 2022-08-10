@@ -1,7 +1,7 @@
-#optional section %, sqrt
+# optional section %, sqrt
 
 class InitialCommand:
-    def __init__(self, operand_1, operand_2, operator, result = None):
+    def __init__(self, operand_1, operand_2, operator, result=None):
         self.result = result
         self.operand_1 = operand_1
         self.operand_2 = operand_2
@@ -12,77 +12,98 @@ class InitialCommand:
         return self._operand_1
 
     @operand_1.setter
-    def operand_1(self, operand_1)->float:
-        if type(operand_1) == float:
+    def operand_1(self, operand_1):
+        try:
+            float(operand_1)
             self._operand_1 = operand_1
+            print(f'{operand_1} is a number')
+        except ValueError:
+            print('Please enter value')
 
     @property
     def operator(self):
         return self._operator
 
     @operator.setter
-    def operator(self, operator)->str:
-        if operator is in : # !!!!!!!!!!I'd like to poit to parser->commands->keys
+    def operator(self, operator) -> str:
+        try:
+            operator in commands
             self._operator = operator
+        except ValueError:
+            print('Please pick mathematical operation')
 
     @property
     def operand_2(self):
         return self._operand_2
 
     @operand_2.setter
-    def operand_2(self, operand_2)->float:
-        if type(operand_2) == float:
-            self._operand_2 = operand_2
+    def operand_2(self, operand_2):
+        try:
+            float(operand_2)
+            self._operand_1 = operand_2
+            print(f'{operand_2} is a number')
+        except ValueError:
+            print('Please enter value')
 
-#Function section
+    def init_():
+        operand_1 = input('>>>')
+        try:
+            int(operand_1)
+        except ValueError:
+            print("Please enter number to strat calculation")
+        operator = input('Please enter operation')
+        try:
+            operator in commands
+        except ValueError:
+            print("Please enter operation")
+        operand_2 = input('>>>>')
+        try:
+            int(operand_2)
+        except ValueError:
+            print("Please enter number to strat calculation")
+
+        match operator:
+            case '+':
+                result = Add.add()
+                print(result)
+            case '-':
+                result = Subtract.subtract()
+                print(result)
+            case '*':
+                result = Multiply.multiply()
+                print(result)
+            case '/':
+                result = Divide.divide()
+                print(result)
+
+            # Function section
+
+
 class Add(InitialCommand):
-    def add(self)->float:
-        if result == None:
-            result = operand_1 + operand_2
-        else:
-          result += operand_1
-        return result
+    def add(self, operand_1, operand_2) -> float:
+        self.result = operand_1 + operand_2
+        return self.result
+
 
 class Subtract(InitialCommand):
-    def subtract(self, operand_1, operator, operand_2, result)->float:
-        pass
+    def subtract(self, operand_1, operator, operand_2, result) -> float:
+        self.result = operand_1 - operand_2
+        return self.result
+
 
 class Multiply(InitialCommand):
-    def multiply(self, operand_1, operator, operand_2, result)->float:
-        pass
+    def multiply(self, operand_1, operator, operand_2, result) -> float:
+        self.result = operand_1 * operand_2
+        return self.result
+
 
 class Divide(InitialCommand):
-    def divide(self, operand_1, operator, operand_2, result)->float:
-        pass
-
-# PARSER
-def parser(user_operator):
-    commands = {'+': Add.add(),
-                '-': Subtract.subtract(),
-                '*': Multiply.multiply(),
-                '/': Divide.divide()}
-    # for user_operator in commands.keys():
-    #     if user_operator == '':
-    #         print('Operator is mandatory. Please enter valid operator')
-    #         raise ValueError:
-def init ():
-    while True:
-        operand_1 = float(input('Please enter first value for calculation\n'))
-        operator = (input('Please enter operator calculation\n'))
-        operand_2 = float(input('Please enter second value for calculation\n'))
-
-        parser(user_input)
-        run = Initial_command()
-        run()
+    def divide(self, operand_1, operator, operand_2, result) -> float:
+        self.result = operand_1 / operand_2
+        return self.result
 
 
-
-
+commands = ['+', '-', '*', '/']
 
 if __name__ == '__main__':
-    init()
-
- # while true call
-# input 1 - number
-# input two - operand
-# input 3 - number
+    run = InitialCommand.init_()
