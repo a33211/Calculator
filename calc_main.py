@@ -1,59 +1,65 @@
 tempSumm = 0
 # function call
+
+
 def func_add(number1, number2):
-    tempSumm = number1 + number2
-    return tempSumm
+    result = number1 + number2
+    return result
 
 
 def func_min(number1, number2):
-    tempSumm = number1 - number2
-    return tempSumm
+    result = number1 - number2
+    return result
 
 
 def func_mult(number1, number2):
-    tempSumm = number1 * number2
-    return tempSumm
+    result = number1 * number2
+    return result
 
 
 def func_div(number1, number2):
-    tempSumm = number1 / number2
-    return tempSumm
-
-
-def execute(number1, number2, operator):
-    for op, func in parser.items():
-        if op == operator:
-            tempSumm = func(number1, number2)
-            print(f"Answer is {tempSumm}")
-
-
-parser = {"+": func_add,
-          "-": func_min,
-          "*": func_mult,
-          "/": func_div}
-
-while True:
-    number1 = input("1>>> \n")
     try:
-        float(number1)
-    except ValueError:
-        print(" Please enter numerical value \n")
-        number1 = input("1>>> \n")
+        result = number1 / number2
+    except ZeroDivisionError as error:
+        print("Invalid equation \n")
+        print(error)
+    finally:
+        return result
 
+def func_exit(*args):
+    print("Bye bye")
+    quit()
+
+def execute():
+    try:
+        number1 = float(input("1>>> \n"))
+        number2 = float(input("2>>> \n"))
+    except ValueError as error:
+        print('You have entered not a number as an input\n')
+        print(error)
+        return
     operator = input("please enter operation \n")
-    if operator == "q":
-        break
     validator = parser.get(operator)
     if not validator:
         print(" Please enter function to execute\n")
         operator = input("please enter operation \n")
 
-    number2 = input("2>>> \n")
+    for op, func in parser.items():
+        if op == operator:
+            print(f"Answer is {func(number1, number2)} \n")
+            #tempSumm = result
 
-    try:
-        float(number2)
-    except ValueError:
-        print(" Please enter numerical value \n")
-        number1 = input("2>>> \n")
 
-    execute(number1, number2, operator)
+parser = {"+": func_add,
+          "-": func_min,
+          "*": func_mult,
+          "/": func_div,
+          "q": func_exit}
+
+while True:
+    execute()
+
+# Fix UnboundLocalError
+# Add TempSum functional
+
+
